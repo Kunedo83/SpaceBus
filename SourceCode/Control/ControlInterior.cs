@@ -6,8 +6,6 @@ public class ControlInterior : InternalModule
 {
     private Animation anim;
     private GameObject boto;
-    private bool repro1 = false;
-    private bool repro2 = true;
     private bool loaded = false;
     
     public void Update()
@@ -31,30 +29,12 @@ public class ControlInterior : InternalModule
             }
             if (!loaded)
             {
-                InternalButton.Create(boto).OnTap(new InternalButton.InternalButtonDelegate(EVAClick));
+                InternalButton.Create(boto).OnTap(new InternalButton.InternalButtonDelegate(Luz));
                 loaded = true;
-            }
-            if (vessel.GetComponent<ModuleLight>().isOn)
-            {                
-                if (!repro1)
-                {
-                    anim.CrossFade("marijuana");
-                    repro1 = true;
-                    repro2 = false;
-                }                
-            }
-            if (!vessel.GetComponent<ModuleLight>().isOn)
-            {
-                if (!repro2)
-                {
-                    anim.CrossFade("marijuana2");
-                    repro2 = true;
-                    repro1 = false;
-                }                
-            }
+            }            
         }        
     }
-    public void EVAClick()
+    public void Luz()
     {
         vessel.GetComponent<ModuleLight>().isOn = !vessel.GetComponent<ModuleLight>().isOn;
     }
